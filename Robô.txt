@@ -1,0 +1,58 @@
+#include <stdio.h>
+
+#define MAX 1000
+
+int L, C;
+int A, B;
+int sala[MAX][MAX];
+int visitado[MAX][MAX] = {0};
+
+// Movimentos possíveis: Norte, Leste, Sul, Oeste
+int dx[4] = {-1, 0, 1, 0};
+int dy[4] = {0, 1, 0, -1};
+
+// Função para verificar se a posição é válida
+int is_valid(int x, int y) {
+    return (x >= 0 && x < L && y >= 0 && y < C && sala[x][y] == 1 && !visitado[x][y]);
+}
+
+int main() {
+    scanf("%d %d", &L, &C);
+    scanf("%d %d", &A, &B);
+    
+    A--; B--; // Ajustar para índices baseados em 0
+
+    // Leitura do mapa da sala
+    for (int i = 0; i < L; i++) {
+        for (int j = 0; j < C; j++) {
+            scanf("%d", &sala[i][j]);
+        }
+    }
+
+    // Posição inicial
+    int x = A, y = B;
+    visitado[x][y] = 1;
+
+    // Caminho do robô
+    while (1) {
+        int encontrou_proximo = 0;
+        for (int d = 0; d < 4; d++) {
+            int nx = x + dx[d];
+            int ny = y + dy[d];
+
+            if (is_valid(nx, ny)) {
+                visitado[nx][ny] = 1;
+                x = nx;
+                y = ny;
+                encontrou_proximo = 1;
+                break;
+            }
+        }
+        if (!encontrou_proximo) {
+            break;
+        }
+    }
+
+    printf("%d %d\n", x + 1, y + 1);
+    return 0;
+}
