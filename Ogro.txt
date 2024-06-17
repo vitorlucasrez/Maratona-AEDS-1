@@ -1,0 +1,36 @@
+#include <stdio.h>
+
+int main() {
+    int N;
+    scanf("%d", &N);
+
+    // Verifica se N está dentro do intervalo válido
+    if (N < 0 || N > 10) {
+        return 1; // Entrada inválida, sair do programa
+    }
+
+    // Determina o número de dedos na mão esquerda
+    int mao_esquerda = (N > 5) ? 5 : N; 
+    // Determina o número de dedos na mão direita
+    int mao_direita = (N > 5) ? (N - 5) : 0; 
+
+    // Imprime a mão esquerda
+    for (int i = 0; i < mao_esquerda; i++) {
+        printf("I");
+    }
+    if (mao_esquerda == 0) {
+        printf("*");
+    }
+    printf("\n");
+
+    // Imprime a mão direita
+    for (int i = 0; i < mao_direita; i++) {
+        printf("I");
+    }
+    if (mao_direita == 0) {
+        printf("*");
+    }
+    printf("\n");
+
+    return 0;
+}
